@@ -10,7 +10,7 @@ describe('Criar Perfil', () => {
       .click();
   });
 
-  it.only('Criar perfil com Sucesso', () => {
+  it.only('Criar Perfil com Sucesso', () => {
 
     //Campo Status
     cy.get('#mui-component-select-status')
