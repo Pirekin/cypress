@@ -73,7 +73,7 @@ describe('Testes de Profile', () => {
   let userID;
   let experienceID;
   let educationID;
-  let githubID;
+  let githubID = perfil.githubusername;
 
   beforeEach(() => {
     cy.tokenJwt().then((auth) => {
@@ -82,7 +82,7 @@ describe('Testes de Profile', () => {
 
   });
 
-  it.only('[POST] - Adiciona perfil', () => {
+  it('[POST] - Adiciona perfil', () => {
 
     cy.request({
       method: 'POST',
@@ -98,7 +98,7 @@ describe('Testes de Profile', () => {
     })
   });
 
-  it.only('[GET] - Buscar perfil pelo github', () => {
+  it('[GET] - Buscar perfil pelo github', () => {
 
     cy.request({
       method: 'GET',
@@ -113,7 +113,7 @@ describe('Testes de Profile', () => {
     })
   });
 
-  it.only('[GET] - Buscar perfil do usuario', () => {
+  it('[GET] - Buscar perfil do usuario', () => {
 
     cy.request({
       method: 'GET',
@@ -125,14 +125,12 @@ describe('Testes de Profile', () => {
       expect(response.status).to.eq(200)
       cy.log(JSON.stringify(response.body))
       userID = response.body.user._id;
-      experienceID = response.body.experience[0] ? response.body.experience[0]._id : '';
-      educationID = response.body.education[0]._id;
       cy.log(response.body.education._id);
       console.log(response.body.education);
     })
   });
 
-  it.only('[GET] - Buscar perfil do usuario por ID', () => {
+  it('[GET] - Buscar perfil do usuario por ID', () => {
 
     cy.request({
       method: 'GET',
@@ -190,6 +188,7 @@ describe('Testes de Profile', () => {
       expect(response.status).to.eq(200)
       console.log(response.body);
       cy.log(JSON.stringify(response.body))
+      experienceID = response.body.experience[0] ? response.body.experience[0]._id : '';
     })
   });
 
@@ -208,7 +207,7 @@ describe('Testes de Profile', () => {
     })
   });
 
-  it('[PUT] - Adiciona formacao academica no perfil do usuario', () => {
+  it.only('[PUT] - Adiciona formacao academica no perfil do usuario', () => {
 
     cy.request({
       method: 'PUT',
@@ -221,10 +220,11 @@ describe('Testes de Profile', () => {
       expect(response.status).to.eq(200)
       console.log(response.body);
       cy.log(JSON.stringify(response.body))
+      educationID = response.body.education[0]._id;
     })
   });
 
-  it('[DELETE] - Deleta formacao academica perfil do usuario', () => {
+  it.only('[DELETE] - Deleta formacao academica perfil do usuario', () => {
 
     cy.request({
       method: 'DELETE',
